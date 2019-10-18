@@ -1,0 +1,21 @@
+﻿@model List<Product>
+
+<h3>Our Products</h3>
+
+<table>
+   <tr>
+       <th>Product ID</th>
+       <th>Name</th>
+       <th>Price</th>
+
+  </tr>
+@foreach(Product prod in Model)
+{
+   <tr>
+       <td>@prod.ProductID</td>
+       <td>@prod.Name</td>
+       <td align="right">@prod.Price</td>
+   </tr>
+}
+
+</table>
