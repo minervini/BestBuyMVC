@@ -7,13 +7,13 @@
        <th>Product ID</th>
        <th>Name</th>
        <th>Price</th>
-
   </tr>
+
 @foreach(Product prod in Model)
 {
    <tr>
        <td>@prod.ProductID</td>
-       <td>@prod.Name</td>
+       <td><a href=Product/ViewProduct/@prod.ProductID>@prod.Name</a></td>
        <td align="right">@prod.Price</td>
    </tr>
 }

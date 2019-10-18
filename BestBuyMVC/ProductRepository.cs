@@ -18,7 +18,6 @@ namespace BestBuyMVC
             using (conn)
             {
                 conn.Open();
-                //cmd.ExecuteNonQuery();
 
                 MySqlDataReader reader = cmd.ExecuteReader();
                 List<Product> allProducts = new List<Product>();
@@ -32,6 +31,35 @@ namespace BestBuyMVC
                     allProducts.Add(currentProduct);
                 }
                 return allProducts;
+            }
+        }
+
+        public Product GetProduct(int id)
+        {
+            MySqlConnection conn = new MySqlConnection();
+            conn.ConnectionString = System.IO.File.ReadAllText("ConnectionString.txt");
+
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT * From Products WHERE ProductID = @id;";
+            cmd.Parameters.AddWithValue("id", id);
+
+            using (conn)
+            {
+                conn.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                var product = new Product();
+
+                while (reader.Read() == true)
+                {
+                    product.ProductID = reader.GetInt32("ProductID");
+                    product.Name = reader.GetString("Name");
+                    product.Price = reader.GetDecimal("Price");
+                    product.OnSale = reader.GetInt32("OnSale");
+                    product.StockLevel = reader.GetString("StockLevel");
+                    product.CategoryID = reader.GetInt32("CategoryID");
+                }
+                return product;
             }
         }
     }

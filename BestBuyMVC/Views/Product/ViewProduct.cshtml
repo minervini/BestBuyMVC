@@ -1,0 +1,25 @@
+﻿@model Product
+
+<h3>Products</h3>
+
+<table cellpadding="22">
+   <tr>
+       <th>Product ID</th>
+       <th>Name</th>
+       <th align="right">Price</th>
+       <th align="right">OnSale</th>
+       <th align="right">Stock Level</th>
+       <th align="right">Category ID</th>
+
+  </tr>
+
+   <tr>
+       <td>@Model.ProductID</td>
+       <td>@Model.Name</td>
+       <td align="right">@Model.Price</td>
+       <td align="right">@Model.OnSale</td>
+       <td align="right">@Model.StockLevel</td>
+       <td align="right">@Model.CategoryID</td>
+   </tr>
+
+</table>
