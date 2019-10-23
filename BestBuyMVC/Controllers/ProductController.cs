@@ -46,10 +46,18 @@ namespace BestBuyMVC.Controllers
 
         public IActionResult InsertProduct()
         {
-            CategoryRepository repo = new CategoryRepository();
-            repo.InsertProduct(product);
+            var repo = new ProductRepository();
+            var prod = repo.AssignCategories();
 
-            return RedirectToAction("ViewProduct", new { id = product.ProductID });
+            return View(prod);
+        }
+
+        public IActionResult InsertProductToDatabase(Product productToInsert)
+        {
+            var repo = new ProductRepository();
+            repo.InsertProduct(productToInsert);
+
+            return RedirectToAction("Index");
         }
     }
 }

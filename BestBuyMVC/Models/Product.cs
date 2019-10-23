@@ -1,4 +1,6 @@
-﻿namespace BestBuyMVC.Models
+﻿using System.Collections.Generic;
+
+namespace BestBuyMVC.Models
 {
     public class Product
     {
@@ -8,5 +10,6 @@
         public int CategoryID { get; set; }
         public int OnSale { get; set; }
         public string StockLevel { get; set; }
+        public List<Category> Categories { get; set; }
     }
 }

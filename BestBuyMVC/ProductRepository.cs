@@ -87,11 +87,11 @@ namespace BestBuyMVC
 
             MySqlCommand cmd = conn.CreateCommand();
 
-            cmd.CommandText = "INSERT INTO products (Name, Price, CategoryID) Values @name, @price, @categoryID";
+            cmd.CommandText = "INSERT INTO products (Name, Price, CategoryID) Values (@name, @price, @categoryID)";
 
             cmd.Parameters.AddWithValue("name", productToInsert.Name);
             cmd.Parameters.AddWithValue("price", productToInsert.Price);
-            cmd.Parameters.AddWithValue("ID", productToInsert.ProductID);
+            cmd.Parameters.AddWithValue("categoryID", productToInsert.CategoryID);
 
             using (conn)
             {
@@ -100,6 +100,17 @@ namespace BestBuyMVC
             }
         }
 
+        public Product AssignCategories()
+        {
+            var catRepo = new CategoryRepository();
+
+            var catList = catRepo.GetCategories();
+
+            Product product = new Product();
+            product.Categories = catList;
+
+            return product;
+        }
 
     }
 }
