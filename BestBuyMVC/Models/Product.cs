@@ -1,5 +1,4 @@
-﻿using System;
-namespace BestBuyMVC.Models
+﻿namespace BestBuyMVC.Models
 {
     public class Product
     {

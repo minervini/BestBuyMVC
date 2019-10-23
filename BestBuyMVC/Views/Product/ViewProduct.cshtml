@@ -1,8 +1,8 @@
 ﻿@model Product
 
-<h3>Products</h3>
+<h3>Product @Model.Name</h3>
 
-<table cellpadding="22">
+<table class="table">
    <tr>
        <th>Product ID</th>
        <th>Name</th>
@@ -16,10 +16,14 @@
    <tr>
        <td>@Model.ProductID</td>
        <td>@Model.Name</td>
-       <td align="right">@Model.Price</td>
-       <td align="right">@Model.OnSale</td>
-       <td align="right">@Model.StockLevel</td>
-       <td align="right">@Model.CategoryID</td>
+       <td>@Model.Price</td>
+       <td>@Model.OnSale</td>
+       <td>@Model.StockLevel</td>
+       <td>@Model.CategoryID</td>
    </tr>
+
+    <div style="display: block">
+        <a href="/Product/UpdateProduct/@Model.ProductID">Update this Product</a>
+    </div>'
 
 </table>

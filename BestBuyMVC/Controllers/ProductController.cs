@@ -24,5 +24,30 @@ namespace BestBuyMVC.Controllers
 
             return View(product);
         }
+
+        public IActionResult UpdateProduct(int id)
+        {
+            ProductRepository repo = new ProductRepository();
+            Product prod = repo.GetProduct(id);
+
+            repo.UpdateProduct(prod);
+
+            if (prod == null)
+            {
+                return View("Product not found");
+            }
+
+            return View(prod);
+
+        }
+
+        public IActionResult UpdateProductToDatabase(Product product)
+        {
+            ProductRepository repo = new ProductRepository();
+            repo.UpdateProduct(product);
+
+            return RedirectToAction("ViewProduct", new { id = product.ProductID });
+
+        }
     }
 }

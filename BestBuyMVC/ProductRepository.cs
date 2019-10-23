@@ -62,5 +62,24 @@ namespace BestBuyMVC
                 return product;
             }
         }
+        public void UpdateProduct(Product productToUpdate)
+        {
+            MySqlConnection conn = new MySqlConnection();
+            conn.ConnectionString = System.IO.File.ReadAllText("ConnectionString.txt");
+
+            MySqlCommand cmd = conn.CreateCommand();
+
+            cmd.CommandText = "UPDATE products Set Name =@name, Price = @price WHERE ProductID = @ID";
+
+            cmd.Parameters.AddWithValue("name", productToUpdate.Name);
+            cmd.Parameters.AddWithValue("price", productToUpdate.Price);
+            cmd.Parameters.AddWithValue("ID", productToUpdate.ProductID);
+
+            using (conn)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }
