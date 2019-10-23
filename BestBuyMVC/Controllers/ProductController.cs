@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using BestBuyMVC.Models;
 
@@ -36,9 +33,7 @@ namespace BestBuyMVC.Controllers
             {
                 return View("Product not found");
             }
-
             return View(prod);
-
         }
 
         public IActionResult UpdateProductToDatabase(Product product)
@@ -47,7 +42,14 @@ namespace BestBuyMVC.Controllers
             repo.UpdateProduct(product);
 
             return RedirectToAction("ViewProduct", new { id = product.ProductID });
+        }
 
+        public IActionResult InsertProduct()
+        {
+            CategoryRepository repo = new CategoryRepository();
+            repo.InsertProduct(product);
+
+            return RedirectToAction("ViewProduct", new { id = product.ProductID });
         }
     }
 }
