@@ -55,8 +55,17 @@ namespace BestBuyMVC
                     product.Name = reader.GetString("Name");
                     product.Price = reader.GetDecimal("Price");
                     product.OnSale = reader.GetInt32("OnSale");
-                    product.StockLevel = reader.GetString("StockLevel");
+                  //product.StockLevel = reader.GetString("StockLevel");
                     product.CategoryID = reader.GetInt32("CategoryID");
+
+                    if (reader.IsDBNull(reader.GetOrdinal("StockLevel")))
+                    {
+                        product.StockLevel = null;
+                    }
+                    else
+                    {
+                        product.StockLevel = reader.GetString("StockLevel");
+                    }
                 }
                 return product;
             }
@@ -112,5 +121,57 @@ namespace BestBuyMVC
             return product;
         }
 
+        public void DeleteFromSales(int productID)
+        {
+            MySqlConnection conn = new MySqlConnection(ConnectionString);
+
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "Delete FROM sales WHERE ProductID = @id;";
+            cmd.Parameters.AddWithValue("id", productID);
+
+            using (conn)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteFromReviews(int productID)
+        {
+            MySqlConnection conn = new MySqlConnection(ConnectionString);
+
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "Delete FROM reviews WHERE ProductID = @id;";
+            cmd.Parameters.AddWithValue("id", productID);
+
+            using (conn)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+        public void DeleteProduct(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(ConnectionString);
+
+            MySqlCommand cmd = conn.CreateCommand();
+            cmd.CommandText = "Delete FROM products WHERE ProductID = @id;";
+            cmd.Parameters.AddWithValue("id", id);
+
+            using (conn)
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void DeleteFromAllTables(int productID)
+        {
+            DeleteFromSales(productID);
+            DeleteFromReviews(productID);
+            DeleteProduct(productID);
+        }
     }
 }
