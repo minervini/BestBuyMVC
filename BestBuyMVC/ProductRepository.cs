@@ -11,8 +11,8 @@ namespace BestBuyMVC
         public List<Product> GetAllProducts()
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "SELECT ProductID, Name, Price FROM products;";
 
             using (conn)
@@ -37,8 +37,8 @@ namespace BestBuyMVC
         public Product GetProduct(int id)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "SELECT * From Products WHERE ProductID = @id;";
             cmd.Parameters.AddWithValue("id", id);
 
@@ -74,11 +74,9 @@ namespace BestBuyMVC
         public void UpdateProduct(Product productToUpdate)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
 
             cmd.CommandText = "UPDATE products Set Name =@name, Price = @price WHERE ProductID = @ID";
-
             cmd.Parameters.AddWithValue("name", productToUpdate.Name);
             cmd.Parameters.AddWithValue("price", productToUpdate.Price);
             cmd.Parameters.AddWithValue("ID", productToUpdate.ProductID);
@@ -93,11 +91,9 @@ namespace BestBuyMVC
         public void InsertProduct(Product productToInsert)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
 
             cmd.CommandText = "INSERT INTO products (Name, Price, CategoryID) Values (@name, @price, @categoryID)";
-
             cmd.Parameters.AddWithValue("name", productToInsert.Name);
             cmd.Parameters.AddWithValue("price", productToInsert.Price);
             cmd.Parameters.AddWithValue("categoryID", productToInsert.CategoryID);
@@ -112,7 +108,6 @@ namespace BestBuyMVC
         public Product AssignCategories()
         {
             var catRepo = new CategoryRepository();
-
             var catList = catRepo.GetCategories();
 
             Product product = new Product();
@@ -124,8 +119,8 @@ namespace BestBuyMVC
         public void DeleteFromSales(int productID)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "Delete FROM sales WHERE ProductID = @id;";
             cmd.Parameters.AddWithValue("id", productID);
 
@@ -139,8 +134,8 @@ namespace BestBuyMVC
         public void DeleteFromReviews(int productID)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "Delete FROM reviews WHERE ProductID = @id;";
             cmd.Parameters.AddWithValue("id", productID);
 
@@ -155,8 +150,8 @@ namespace BestBuyMVC
         public void DeleteProduct(int id)
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "Delete FROM products WHERE ProductID = @id;";
             cmd.Parameters.AddWithValue("id", id);
 

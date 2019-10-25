@@ -63,7 +63,6 @@ namespace BestBuyMVC.Controllers
         public IActionResult DeleteProduct(Product prod)
         {
             var repo = new ProductRepository();
-
             repo.DeleteFromAllTables(prod.ProductID);
 
             return RedirectToAction("Index");

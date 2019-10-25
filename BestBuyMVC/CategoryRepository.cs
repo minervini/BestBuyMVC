@@ -11,8 +11,8 @@ namespace BestBuyMVC
         public List<Category> GetCategories()
         {
             MySqlConnection conn = new MySqlConnection(ConnectionString);
-
             MySqlCommand cmd = conn.CreateCommand();
+
             cmd.CommandText = "SELECT * FROM Categories;";
 
             using (conn)
@@ -22,6 +22,7 @@ namespace BestBuyMVC
                 MySqlDataReader reader = cmd.ExecuteReader();
 
                 var allCategories = new List<Category>();
+
                 while (reader.Read())
                 {
                     var currentCategory = new Category();
